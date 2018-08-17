@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+</head>
+<body>
+
+</body>
+<script type="text/javascript" src="promise.js"></script>
+<script type="text/javascript">
+    var p = new umc_promise(function (resolve, reject, progress) {
+        var index = 1;
+        var t_handler = setInterval(function () {
+            progress("hello umc_promise progress: " + index++);
+        }, 1000);
+
+        setInterval(function () {
+            clearInterval(t_handler);
+            resolve("hello umc_promise");
+        }, 5000);
+    });
+    p.then(function (res) {
+        document.body.innerHTML = res;
+    }, function (err) {
+            //TODO:: handle error event
+    }, function (res) {
+        document.body.innerHTML = res;
+    })
+</script>
+</html>
